@@ -10,6 +10,26 @@ const currentPath = fileURLToPath(import.meta.url)
 const tripsFile = fs.readFileSync(path.join(dirname(currentPath), '../config/data/data.json'))
 const tripsData = JSON.parse(tripsFile)
 
+const dropAllTables = async () => {
+    const dropTablesQuery = `
+    DROP TABLE IF EXISTS trips_users;
+    DROP TABLE IF EXISTS trips_destinations;
+    DROP TABLE IF EXISTS activities;
+    DROP TABLE IF EXISTS users;
+    DROP TABLE IF EXISTS destinations;
+    DROP TABLE IF EXISTS trips;
+    `
+
+    try {
+        const res = await pool.query(dropTablesQuery)
+        console.log('🗑️ All tables dropped successfully')
+
+    } catch (err) {
+        console.error('⚠️ error dropping tables', err)
+    }
+}
+
+
 const createTripsTable = async () => {
   const createTripsTableQuery = `
       DROP TABLE IF EXISTS trips;
