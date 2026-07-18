@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
 app.use('/api/trips', tripRoutes)
 
 
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on http://localhost:${PORT}`);
