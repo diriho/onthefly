@@ -26,4 +26,5 @@ const deleteActivity = async (req, res) => {
 
 }
 
+
 export default { createActivity, getActivities, getActivity, updateActivity, deleteActivity }   
