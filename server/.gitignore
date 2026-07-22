@@ -1,0 +1,4 @@
+.node_modules
+/node_modules
+/.claude
+/server/node_modules

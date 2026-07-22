@@ -1,23 +1,58 @@
 import {pool} from '../config/database.js'
 
-const createDestination = async (req, res) => {
+const createTripDestination = async (req, res) => {
+    try{
+        const {trip_id, destination_id} = req.body
+        const result = await pool.query(
+            `INSERT INTO trips_destinations (trip_id, destination_id) VALUES ($1, $2) RETURNING *`,
+            [trip_id, destination_id]
+        )
+        const newTripDestination = result.rows[0]
+        res.status(201).json(newTripDestination)
+        
+    }catch (error) {
+        res.status(409).json({ error: error.message })
+
+    }
     
 }   
 
-const getDestinations = async (req, res) => {
+const getTripsDestinations = async (req, res) => {
+    try{
+        const result = await pool.query('SELECT * FROM trips_destinations')
+        res.status(200).json(result.rows)   
+
+    }catch (error) {
+        res.status(409).json({ error: error.message })
+    }
 
 }
 
-const getDestination = async (req, res) => {
+const getAllTripsByDestination = async (req, res) => {
+    try{
+        const {destination_id} = parseInt(req.params.destination_id)
+        const result = await pool.query('SELECT * FROM trips_destinations WHERE destination_id = $1', [destination_id])
+        res.status(200).json(result.rows)
+        
+    }catch (error) {
+        res.status(409).json({ error: error.message })
+    }
 
 }
 
-const updateDestination = async (req, res) => {
-    
-}   
+const getAllDestinationsByTrip = async (req, res) => {
+    try{
+        const {trip_id} = parseInt(req.params.trip_id)
+        const result = await pool.query('SELECT * FROM trips_destinations WHERE trip_id = $1', [trip_id])
+        res.status(200).json(result.rows)
+        
+    }catch (error) {
+        res.status(409).json({ error: error.message })
+    }
 
-const deleteDestination = async (req, res) => {
-    
-}       
+}
 
-export default { createDestination, getDestinations, getDestination, updateDestination, deleteDestination }
+
+
+
+export default { createTripDestination, getTripsDestinations, getAllTripsByDestination, getAllDestinationsByTrip }
