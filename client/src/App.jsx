@@ -6,7 +6,7 @@ import CreateTrip from './pages/CreateTrip'
 import EditTrip from './pages/EditTrip'
 import CreateDestination from './pages/CreateDestination';
 import ReadDestinations from './pages/ReadDestinations'
-import TripDetails from './pages/TripDetails'
+//import TripDetails from './pages/TripDetails'
 import CreateActivity from './pages/CreateActivity';
 import AddToTrip from './pages/AddToTrip';
 
@@ -41,7 +41,7 @@ const App = () => {
     },
     {
       path:"/trip/get/:id",
-      element: <TripDetails data={trips} />
+      // element: <TripDetails data={trips} />
     },
     {
       path:"/destination/new/:trip_id",
