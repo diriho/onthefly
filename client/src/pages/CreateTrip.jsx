@@ -14,14 +14,27 @@ const CreateTrip = () => {
             }
         })
     }
-    
+
+
     const createPost = (event) => {
         event.preventDefault();
 
+        // option handler for the fetch request
+        const options = {
+            method: 'POST',
+            headers : {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(trip)
+        }
 
-        
+        fetch('http://localhost:3000/api/trips', options)
+        window.location.href = '/';
+
     }
 
+
+  
 
     return (
         <div>

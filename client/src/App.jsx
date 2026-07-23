@@ -6,9 +6,10 @@ import CreateTrip from './pages/CreateTrip'
 import EditTrip from './pages/EditTrip'
 import CreateDestination from './pages/CreateDestination';
 import ReadDestinations from './pages/ReadDestinations'
-//import TripDetails from './pages/TripDetails'
+import TripDetails from './pages/TripDetails'
 import CreateActivity from './pages/CreateActivity';
 import AddToTrip from './pages/AddToTrip';
+
 
 
 const App = () => {
@@ -17,8 +18,22 @@ const App = () => {
   const [destinations, setDestinations] = useState([]);
 
   useEffect(() => {
+    // fetch trips from the backend
+    const fetchTrips = async () => {
+      const response = await fetch('http://localhost:3000/api/trips')
+      const data = await response.json()
+      setTrips(data)
 
+    }
 
+    const fetchDestinations = async () => {
+      const response = await fetch('http://localhost:3000/api/destinations')
+      const data = await response.json()
+      setDestinations(data)
+    }
+
+    fetchTrips()
+    fetchDestinations()
   }, []);
 
   // Sets up routes
@@ -41,7 +56,7 @@ const App = () => {
     },
     {
       path:"/trip/get/:id",
-      // element: <TripDetails data={trips} />
+      element: <TripDetails data={trips} />
     },
     {
       path:"/destination/new/:trip_id",

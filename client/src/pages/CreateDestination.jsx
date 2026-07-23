@@ -21,18 +21,41 @@ const CreateDestination = () => {
         
         event.preventDefault();
 
-
+        // add destination to the database
         const addDestination = async () => {
+            const options = {
+                method: 'POST',
+                headers : {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(destination)
+            }
 
- 
-        
+            const response = await fetch('http://localhost:3000/api/destinations', options)
+            const data = await response.json()
+            setDestination(data)
+
+
         }
 
         const createTripDestination = async (destination_id) => {
+            const options = { 
+                method: 'POST',
+                body: JSON.stringify({
+                    trip_id: parseInt(trip_id), 
+                    destination_id: parseInt(destination_id)
+                }),
+            }
 
+            const response = await fetch('http://localhost:3000/api/trip_destinations', options)
+            const data = await response.json()
+            
+
+        }
+
+        addDestination().then(res => createTripDestination(res)).then(res => window.location = '/')
 
         
-        }
 
 
     }

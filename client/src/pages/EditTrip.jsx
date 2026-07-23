@@ -24,17 +24,38 @@ const EditTrip = ({data}) => {
     }
     
 
+    // frontend facing frontendd update route controller
     const updatePost = (event) => {
         event.preventDefault();
 
+        // option handler for the fetch request
+        const options = {
+            method: 'PATCH',
+            headers : {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(post)
+        }
 
+        fetch('http://localhost:3000/api/trips/' + id, options)
 
     }
 
 
+
+
+    // frontend facing delete route controller
     const deletePost = (event) => {
         event.preventDefault();
 
+        // option handler for the fetch request
+        const options = {
+            method: 'DELETE',
+
+        }
+
+        fetch('http://localhost:3000/api/trips/' + id, options)
+        window.location.href = '/';
         
     }
 
